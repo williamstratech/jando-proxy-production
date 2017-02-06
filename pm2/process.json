@@ -1,0 +1,16 @@
+{
+  "apps" : [
+    {
+        "name"       : "jando-proxy1",
+        "script"      : "/home/sites/jando-proxy1/server.js",
+        "watch"       : true,
+        "error_file"  : "/home/pm2logs/jando-proxy1_error.log",
+        "out_file"    : "/home/pm2logs/jando-proxy1.log",
+        "log_date_format"    : "YYYY-MM-DD HH:mm Z",
+        "merge_logs"      : true,
+        "env": {
+        }
+    }
+  ]
+
+}

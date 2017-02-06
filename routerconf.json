@@ -1,0 +1,80 @@
+{
+	"targets" : [
+		{"label": "web-server-dev", "ip": "52.50.7.180", "port": "80"}, //nginx
+		{"label": "spika-staging", "ip": "54.154.134.41", "port": "8080"},
+		{"label": "wordpress-staging", "ip": "54.194.242.105", "port": "80"},
+
+		{"label": "consumer-api-staging", "ip": "52.50.7.180", "port": "31001"},
+		{"label": "gps-ehi-staging", "ip": "52.50.7.180", "port": "31004"},
+		{"label": "admin-api-staging", "ip": "52.50.7.180", "port": "31002"},
+		{"label": "api-staging", "ip": "52.50.7.180", "port": "31003"},
+		{"label": "xml-api-staging", "ip": "52.50.7.180", "port": "31005"},
+
+		{"label": "lb-example.jando.com", "lb": [{"ip": "52.50.7.180", "port": "31001", "disabled":true}]}
+	],
+	"domains": [
+		//APIs
+		{"name" : ["gps-ehi.jando.com"], "default_target": "gps-ehi-staging" },
+		{"name" : ["gps-ehi-test.jando.com"], "default_target": "gps-ehi-staging" },
+		{"name" : ["consumer-web-api-test.jando.com", "consumer-api-test.jando.com"], "default_target": "consumer-api-staging" },
+		{"name" : ["admin-web-api-test.jando.com"], "default_target": "admin-api-staging" },
+		{"name" : ["api.jando.com"], "default_target": "api-staging" },
+		{"name" : ["xml-api.jando.com"], "default_target": "xml-api-staging" },
+
+		//websites
+		{"name" : ["test.jando.com"], "default_target": "web-server-dev" },  ///home/sites/web-brochure-consumer-v1-test
+		{"name" : ["jando.com", "www.jando.com"], "default_target": "web-server-dev" },  ///home/sites/web-brochure-consumer-v1
+		{"name" : ["web-assets-test.jando.com"], "default_target": "web-server-dev" },  ///home/sites/consumer-web-api-v1-spika/web_assets
+		{"name" : ["consumer-stage.jando.com"], "default_target": "web-server-dev" },  ///home/sites/app-web-v1/dist
+		{"name" : ["admin-stage.jando.com"], "default_target": "web-server-dev" },  ///home/sites/app-web-admin-v1/dist
+		{"name" : ["cms-test.jando.com"], "default_target": "wordpress-staging" },  
+
+		{
+			"name" : ["staging.jando.com"],
+			"default_target": "spika-staging",
+			"basic_auth" : {
+				"enabled" : true,
+				"ip_whitelist": [
+					"151.237.234.82"
+				],
+				"credentials" : [
+				  {"name": "Jaco", "pass": "BWop123"},
+				  {"name": "Matti", "pass": "KPW345ds"},
+				  {"name": "Tim", "pass": "g84LcSrL"},
+				  {"name": "Hratch", "pass": "FzVPkwSx"},
+				  {"name": "Limor", "pass": "Qdckvkn4"},
+				  {"name": "MJ", "pass": "2DvGn5Rv"},
+				  {"name": "Christine", "pass": "KWnTJBZb"},
+				  {"name": "Tsholo", "pass": "ccfHmwH8"},
+				  {"name": "Jamie", "pass": "umDfn6q5"},
+				  {"name": "Xanthe", "pass": "JpFMwwVk"},
+				  {"name": "Sean", "pass": "A2bn2zKq"},
+				  {"name": "Marius", "pass": "TpVREfEF"},
+				  {"name": "Gabriel", "pass": "vQcjeXTS"},
+				  {"name": "Agazio", "pass": "sJYSEB8C"},
+				  {"name": "Alex", "pass": "ks8PZudn"},
+				  {"name": "Pawel", "pass": "NRZwn2p3"},
+				  {"name": "Kevin", "pass": "NRZwnS23"}
+				]
+			},
+			"default_options" : {
+				"xfwd" : true
+			},
+			"routes" : [
+				{"matchstart": "/consumer-api", "target": "consumer-api-staging", "replacematch": "/consumer-api", "replacewith": ""},
+				///home/sites/web-brochure-consumer-v1-stage
+				{"matchstart": "/", "target": "web-server-dev"},
+				{"matchstart": "/index", "target": "web-server-dev"},
+				{"matchstart": "/arabic", "target": "web-server-dev"},
+				{"matchstart": "/tandc.html", "target": "web-server-dev"}
+				{"matchstart": "/jfonts", "target": "web-server-dev"},
+				{"matchstart": "/jimg", "target": "web-server-dev"},
+				{"matchstart": "/jjimg", "target": "web-server-dev"},
+				{"matchstart": "/jjs", "target": "web-server-dev"},
+				{"matchstart": "/jlib", "target": "web-server-dev"},
+				{"matchstart": "/src", "target": "web-server-dev"},
+				{"regex": "----", "target": "later"}
+			],
+		}
+	]
+}
