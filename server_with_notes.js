@@ -67,7 +67,7 @@ var req_debug_obj = function(req){
 
 
 /*
-https://staging.jando.com/register/new-products-debug-info
+https://jando.com/register/new-products-debug-info
 
 
 */
@@ -75,10 +75,10 @@ https://staging.jando.com/register/new-products-debug-info
 
 
 proxy.on('proxyReq', function(proxyReq, req, res, options) {
-  if(req.headers['host'] && req.headers['host'] == 'staging1.jando.com'){
-  	proxyReq.setHeader('Host', 'staging.jando.com');
+  if(req.headers['host'] && req.headers['host'] == '.jando.com'){
+  	proxyReq.setHeader('Host', 'jando.com');
   }
-  //proxyReq.setHeader('Referer', 'http://staging.jando.com/');
+  //proxyReq.setHeader('Referer', 'http://jando.com/');
 
   // if(req.headers['x-forwarded-proto'] && req.headers['x-forwarded-proto'] == 'https'){
   // 	console.log('Setting X-Forwarded-Proto');
@@ -98,16 +98,16 @@ proxy.on('error', function (err, req, res) {
 
 proxy.on('proxyRes', function(proxyRes, req, res) {
   console.log('RAW Response from the target', JSON.stringify(proxyRes.headers, true, 2));
-  //res.setHeader('Access-Control-Allow-Origin', 'https://staging.jando.com');
+  //res.setHeader('Access-Control-Allow-Origin', 'https://jando.com');
   //res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
 
 
 	var transformerFunction2 = function (data, req, res) {
 	  //return data + "\n // an additional line at the end of every file";
 	  var new_data1 = data + "\n";
-	  //var new_data2 = new_data1.split('s3-eu-west-1.amazonaws.com/qa.jando-frontend').join('staging.jando.com');
+	  //var new_data2 = new_data1.split('s3-eu-west-1.amazonaws.com/qa.jando-frontend').join('jando.com');
 	  //var new_data2 = new_data1.split('filer-icons/jquery-filer.css').join('filter-icons/jquery-filter.css');
-	  //var new_data2 = new_data1.replace('s3-eu-west-1.amazonaws.com/qa.jando-frontend','staging.jando.com');
+	  //var new_data2 = new_data1.replace('s3-eu-west-1.amazonaws.com/qa.jando-frontend','jando.com');
 	  return new_data2;
 	};
 	var transformerFunction = function (data, req, res) {
@@ -115,7 +115,7 @@ proxy.on('proxyRes', function(proxyRes, req, res) {
 	};
 
 	var headers = [
-		//{'name' : 'Access-Control-Allow-Origin', 'value' : 'https://staging.jando.com'} 
+		//{'name' : 'Access-Control-Allow-Origin', 'value' : 'https://jando.com'} 
 	];
   var transformerOptions = {
   	//headers: headers
@@ -129,7 +129,7 @@ proxy.on('proxyRes', function(proxyRes, req, res) {
 
 
 	var corsOptions = {
-	  origin: 'https://staging.jando.com',
+	  origin: 'https://jando.com',
 	  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 	};
   cors()(req,res,next);
@@ -201,7 +201,7 @@ var server1_handler = function (req, res) {
   var need_auth = need_authentication();
   if(need_auth){
 	    res.statusCode = 401;
-	    res.setHeader('WWW-Authenticate', 'Basic realm="staging.jando.com"')
+	    res.setHeader('WWW-Authenticate', 'Basic realm="jando.com"')
 	    res.end('Please contact Jando for access credentials.')
 	    return;
   }
@@ -209,16 +209,16 @@ var server1_handler = function (req, res) {
   //console.log(JSON.stringify(req_debug_obj(req),null,2));
 
 
-    // "host": "staging.jando.com",
+    // "host": "jando.com",
     // "cf-ipcountry": "ZA",
     // "x-forwarded-for": "105.5.197.22",
     // "cf-ray": "2f9e8bf7ffc615ec-JNB",
-    // "referer": "https://staging.jando.com/",
+    // "referer": "https://jando.com/",
     // "accept-language": "en-US,en;q=0.8",
     // "cookie": "__cfduid=dcb6e55425534dc33836dc7832cbe6cda1472784702; JSESSIONID=8A01B6755AC58A5B21F1B94EBC03A848",
     // "cf-connecting-ip": "105.5.197.22"
 
-  // res.setHeader('Access-Control-Allow-Origin', 'https://staging.jando.com');
+  // res.setHeader('Access-Control-Allow-Origin', 'https://jando.com');
   // res.setHeader('Access-Control-Allow-Origin', 'https://s3-eu-west-1.amazonaws.com');
 
   var req_obj = {};
@@ -243,8 +243,8 @@ var server1_handler = function (req, res) {
         // proxy_set_header X-NginX-Proxy true;
 
 
-  var cms_server = '52.50.7.180:80';
-  var spika_server = '54.154.134.41:8080';
+  var cms_server = '10.0.4.122:80';
+  var spika_server = '10.0.6.242:8080';
   var target = 'http://' + spika_server; // + req.url; //default
   if(req.url === '/'){
     target = 'http://' + cms_server;

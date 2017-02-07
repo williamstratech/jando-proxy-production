@@ -1,11 +1,11 @@
 pm2 start /home/pm2conf/process.json  --only jando-proxy1
 
 
-Domains to go through staging jando-proxy1
+Domains to go through  jando-proxy01
 
-router 54.229.111.165
+router 54.194.223.181
 
-grep -C 5 consumer-stage jando-proxy1.log | tail -n200
+grep -C 5 consumer jando-proxy01.log | tail -n200
 
 
 
