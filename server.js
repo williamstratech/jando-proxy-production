@@ -48,34 +48,34 @@ var auth_users = [
   {name: 'William', pass: 'NH775tH'}
 ];
 
-var demo_server = '52.50.7.180';
-var spika_server = '54.154.134.41';
-var wordpress_server = '54.171.64.160';
+var app_server_gps = '10.0.5.10';
+var app_server = '10.0.6.37';
+var spika_server = '10.0.6.242';
+var wordpress_server = '10.0.4.122';
 var accounting_server = '52.48.200.57';
 
 var host_map = [
-  {host:'staging.jando.com', server: wordpress_server, port: '80'},
+  {host:'production.jando.com', server: wordpress_server, port: '80'},
 
-  {host:'secure-stage.jando.com', server: spika_server, port: '8080'},
-  {host:'admin-stage.jando.com', server: demo_server, port: '80'},
-  {host:'adminold-stage.jando.com', server: demo_server, port: '80'},
-  {host:'business-stage.jando.com', server: demo_server, port: '80'},
-  {host:'consumer-stage.jando.com', server: demo_server, port: '80'},
+  {host:'secure.jando.com', server: spika_server, port: '8080'},
+  {host:'admin.jando.com', server: app_server, port: '80'},
+  {host:'adminold.jando.com', server: app_server, port: '80'},
+  {host:'business.jando.com', server: app_server, port: '80'},
+  {host:'consumer.jando.com', server: app_server, port: '80'},
 
-  {host:'web-assets-test.jando.com', server: demo_server, port: '80'},
+  {host:'web-assets.jando.com', server: app_server, port: '80'},
   
-  {host:'gps-ehi.jando.com', server: demo_server, port: '31005'},
-  {host:'gps-ehi-test.jando.com', server: demo_server, port: '31005'},
-  {host:'xml-api.jando.com', server: demo_server, port: '31005'},
-  {host:'ivrapi.jando.com', server: demo_server, port: '31005'},
-  {host:'consumer-web-api-test.jando.com', server: demo_server, port: '31001'},
-  {host:'consumer-api-test.jando.com', server: demo_server, port: '31001'},
-  {host:'admin-web-api-test.jando.com', server: demo_server, port: '31002'},
-  {host:'business-web-api-test.jando.com', server: demo_server, port: '31006'},
-  {host:'api.jando.com', server: demo_server, port: '31003'},
+  {host:'gps-ehi.jando.com', server: app_server_gps, port: '31005'},
+  {host:'gps-ehi-test.jando.com', server: app_server_gps, port: '31005'},
+  {host:'xml-api.jando.com', server: app_server, port: '31005'},
+  {host:'ivrapi.jando.com', server: app_server, port: '31005'},
+  {host:'consumer-web-api.jando.com', server: app_server, port: '31001'},
+  {host:'consumer-api.jando.com', server: app_server, port: '31001'},
+  {host:'admin-web-api.jando.com', server: app_server, port: '31002'},
+  {host:'business-web-api.jando.com', server: app_server, port: '31006'},
+  {host:'api.jando.com', server: app_server, port: '31003'},
 
-  {host:'cms-test.jando.com', server: wordpress_server, port: '80'},
-  {host:'cms-dev.jando.com', server: wordpress_server, port: '80'},
+  {host:'production.jando.com', server: wordpress_server, port: '80'},
 
   {host:'accounting.jando.com', server: accounting_server, port: '80'}
 ];
@@ -214,7 +214,7 @@ var server1_handler = function (req, res) {
   var target = '';
 
   if(startsWith(req.url,'/consumer-api/')){
-    target = 'http://' + demo_server + ':' + '31001';
+    target = 'http://' + app_server + ':' + '31001';
     req.url = req.url.replace('/consumer-api','');
   }
 
